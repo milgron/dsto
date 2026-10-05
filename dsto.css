@@ -1,14 +1,16 @@
 /*
  * dsto · clases del design system de Taller Oliva (sin Tailwind: CSS plano).
  * Necesita tokens.css antes. Extraído de talleroliva/web/src/app/globals.css (2026-10-05).
+ * Usa roles (--background, --foreground, --primary…), así cada clase funciona en claro y en
+ * oscuro. Las tramas de fondo (.olive-dots, .pine-grain) son materiales: no cambian con el tema.
  */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--paper);
-  color: var(--ink);
+  background-color: var(--background);
+  color: var(--foreground);
   font-feature-settings: "ss01", "kern";
   /* nada puede ensanchar la página: lo que sobre se recorta, no scrollea */
   overflow-x: clip;
@@ -16,8 +18,8 @@ body {
 
 
 ::selection {
-  background: var(--olive);
-  color: var(--ink);
+  background: var(--highlight);
+  color: var(--highlight-foreground);
 }
 
 /* ── Etiquetas mono, estilo ventana ─────────────────────────────── */
@@ -32,7 +34,7 @@ body {
 /* ── Línea de puntos (leader) ───────────────────────────────────── */
 .leader {
   flex: 1;
-  border-bottom: 2px dotted var(--ink);
+  border-bottom: var(--border-rule) dotted var(--foreground);
   transform: translateY(-0.35em);
   min-width: 2rem;
 }
@@ -63,15 +65,17 @@ body {
   align-items: center;
   min-height: 2rem;
   padding: 0.25rem 0.6rem;
-  border: 1px solid var(--ink);
-  background: var(--paper);
-  color: var(--ink);
+  border: var(--border-hair) solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
   text-align: left;
   cursor: pointer;
 }
-.chip:hover:not(:disabled) { background: var(--oil); }
+.chip:hover:not(:disabled) { background: var(--secondary); color: var(--secondary-foreground); }
 .chip:disabled { cursor: default; opacity: 0.5; }
-.chip-on, .chip-on:disabled { background: var(--ink); color: var(--paper); opacity: 1; }
+/* activo: invertido (texto sobre fondo de texto), no el color principal */
+.chip-on, .chip-on:disabled, .chip-on:hover:not(:disabled) { background: var(--foreground); color: var(--background); opacity: 1; }
+.chip:focus-visible, .btn-px:focus-visible { outline: var(--border-rule) solid var(--ring); outline-offset: 2px; }
 
 /* ── Cursor parpadeante ─────────────────────────────────────────── */
 @keyframes blink { 50% { opacity: 0 } }
@@ -87,7 +91,7 @@ body {
 .leader-gif {
   border-bottom: 0;
   height: 2px;
-  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-image: radial-gradient(circle, var(--foreground) 1px, transparent 1.2px);
   background-size: 8px 2px;
   background-repeat: repeat-x;
   animation: march 0.6s steps(4) infinite;
@@ -116,20 +120,20 @@ body {
  * y --dpx el tamaño del píxel.
  * ══════════════════════════════════════════════════════════════════ */
 
-/* botón principal: bloque pino; al pasar, el relleno se vuelve trama */
+/* botón principal: bloque pino (oliva en oscuro); al pasar, el relleno se vuelve trama de tinta */
 .btn-px {
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
   padding: 0.35em 0.8em 0.4em;
-  background: var(--pine);
-  color: var(--paper);
+  background: var(--primary);
+  color: var(--primary-foreground);
   --dither: var(--ink);
   --dpx: 3px;
 }
 .btn-px::after { content: "→"; font-family: var(--font-jetbrains), monospace; font-size: 0.7em; }
 .btn-px:hover {
-  background-color: var(--pine);
+  background-color: var(--primary);
   background-image: radial-gradient(circle, var(--dither) 1.3px, transparent 1.8px);
   background-size: 4px 4px;
 }
@@ -178,8 +182,8 @@ body {
 .film-grade { filter: grayscale(1) contrast(1.18) brightness(1.02); }
 
 /* ── Píxel de estado (semáforo): la forma acompaña a la etiqueta, nunca el color solo ── */
-.px { display: inline-block; flex: none; width: 9px; height: 9px; border: 1px solid var(--ink); }
-.px-ok { background: var(--leaf); border-color: var(--leaf); }
-.px-warn { background: var(--mustard); border-color: var(--mustard); }
-.px-down { background: var(--paprika); border-color: var(--paprika); }
+.px { display: inline-block; flex: none; width: 9px; height: 9px; border: var(--border-hair) solid var(--foreground); }
+.px-ok { background: var(--success); border-color: var(--success); }
+.px-warn { background: var(--warning); border-color: var(--warning); }
+.px-down { background: var(--destructive); border-color: var(--destructive); }
 .px-new { background: transparent; }

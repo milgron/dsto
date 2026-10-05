@@ -1,5 +1,6 @@
 /* dsto · tokens del design system de Taller Oliva. GENERADO desde src/tokens.ts con `node scripts/build.mjs`: no editar a mano. */
 
+/* materiales: constantes, iguales en los dos temas. Los componentes usan los roles de abajo. */
 :root {
   /* paleta */
   --paper: #f7f4ee; /* papel: fondo papel: blanco cálido */
@@ -11,23 +12,175 @@
   --line: rgba(28, 26, 23, 0.18); /* línea: bordes y divisores suaves */
 
   /* semáforo: estados de UX, nunca el color solo */
-  --leaf: #3d7a4c; /* hoja: ok · texto y formas */
+  --leaf: #3d7a4c; /* hoja: ok · formas y relleno */
+  --leaf-ink: #337344; /* hoja texto: ok · texto (4,53:1 sobre hoja suave) */
   --mustard: #b07a1c; /* mostaza: aviso · solo formas (3,39:1) */
   --mustard-ink: #86590c; /* mostaza texto: aviso · texto */
-  --paprika: #b3402c; /* pimentón: caído · texto y formas */
+  --paprika: #b3402c; /* pimentón: caído · formas y relleno */
+  --paprika-ink: #a43d2b; /* pimentón texto: caído · texto (4,88:1 sobre pimentón suave) */
   --leaf-soft: #dfe8d6; /* hoja suave: fondo de fila ok */
   --mustard-soft: #f1e3c2; /* mostaza suave: fondo de fila aviso */
   --paprika-soft: #f3dcd4; /* pimentón suave: fondo de fila caído */
-
-  /* series de datos (gráficos): nunca el semáforo como serie */
-  --series-1: #255691; /* pizarra: serie 1 · y la única, si hay una sola */
-  --series-2: #a5679f; /* brezo: serie 2 */
 
   /* tipografía: las variables --font-fraunces y --font-jetbrains las define next/font en cada app */
   --dsto-font-display: var(--font-fraunces, "Fraunces"), ui-serif, Georgia, serif;
   --dsto-font-mono: var(--font-jetbrains, "JetBrains Mono"), ui-monospace, monospace;
 
+  /* espaciado: base 4px */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* radios y bordes */
+  --radius-box: 0px; /* cajas, botones, campos, chips: planos */
+  --radius-mark: 2px; /* punta de barras y marcas de datos */
+  --radius-dot: 9999px; /* puntos de dato y marcadores */
+  --border-hair: 1px; /* cajas, campos, chips, píxel de estado */
+  --border-rule: 2px; /* leader, reglas, foco */
+
   /* tramas (dither): tinta y tamaño de píxel por defecto */
   --dither: var(--olive);
   --dpx: 2px;
+}
+
+/* roles: claro por defecto. data-theme="light" sirve para una isla clara dentro de una página oscura. */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --primary: var(--pine);
+  --primary-foreground: var(--paper);
+  --secondary: var(--oil);
+  --secondary-foreground: var(--ink);
+  --muted: var(--oil);
+  --muted-foreground: rgba(28, 26, 23, 0.68);
+  --accent: var(--oil);
+  --accent-foreground: var(--ink);
+  --border: var(--ink);
+  --border-subtle: rgba(28, 26, 23, 0.18);
+  --input: var(--ink);
+  --ring: var(--pine);
+  --highlight: var(--olive);
+  --highlight-foreground: var(--ink);
+  --success: var(--leaf);
+  --success-foreground: var(--paper);
+  --success-text: var(--leaf-ink);
+  --success-muted: var(--leaf-soft);
+  --warning: var(--mustard);
+  --warning-foreground: var(--ink);
+  --warning-text: var(--mustard-ink);
+  --warning-muted: var(--mustard-soft);
+  --destructive: var(--paprika);
+  --destructive-foreground: var(--paper);
+  --destructive-text: var(--paprika-ink);
+  --destructive-muted: var(--paprika-soft);
+  --chart-1: #255691; /* pizarra */
+  --chart-2: #a5679f; /* brezo */
+  --chart-3: #62359c; /* lirio */
+  --chart-4: #009bb4; /* turquesa */
+  --chart-5: #763a64; /* ciruela */
+  --chart-6: #617de6; /* aciano */
+  /* alias de 0.1 */
+  --series-1: var(--chart-1);
+  --series-2: var(--chart-2);
+}
+
+/* oscuro: solo si se pide. Nunca sigue al sistema por su cuenta, así nadie cambia de tema sin querer. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: var(--ink);
+  --foreground: var(--oil);
+  --card: #201e1a;
+  --card-foreground: var(--oil);
+  --primary: var(--olive);
+  --primary-foreground: var(--ink);
+  --secondary: #2a2722;
+  --secondary-foreground: var(--oil);
+  --muted: #2a2722;
+  --muted-foreground: #a5a294;
+  --accent: #2a2722;
+  --accent-foreground: var(--oil);
+  --border: #959285;
+  --border-subtle: rgba(230, 226, 207, 0.18);
+  --input: #959285;
+  --ring: var(--olive);
+  --highlight: var(--olive);
+  --highlight-foreground: var(--ink);
+  --success: #62bb78;
+  --success-foreground: var(--ink);
+  --success-text: #62bb78;
+  --success-muted: #1f3423;
+  --warning: #e1a446;
+  --warning-foreground: var(--ink);
+  --warning-text: #e1a446;
+  --warning-muted: #3e2d15;
+  --destructive: #ed7760;
+  --destructive-foreground: var(--ink);
+  --destructive-text: #ed7760;
+  --destructive-muted: #44241e;
+  --chart-1: #1c8dff; /* pizarra */
+  --chart-2: #be6db7; /* brezo */
+  --chart-3: #8b46df; /* lirio */
+  --chart-4: #009aba; /* turquesa */
+  --chart-5: #92537e; /* ciruela */
+  --chart-6: #4961c8; /* aciano */
+  /* alias de 0.1 */
+  --series-1: var(--chart-1);
+  --series-2: var(--chart-2);
+}
+
+/* data-theme="auto": sigue al sistema. */
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] {
+    color-scheme: dark;
+    --background: var(--ink);
+    --foreground: var(--oil);
+    --card: #201e1a;
+    --card-foreground: var(--oil);
+    --primary: var(--olive);
+    --primary-foreground: var(--ink);
+    --secondary: #2a2722;
+    --secondary-foreground: var(--oil);
+    --muted: #2a2722;
+    --muted-foreground: #a5a294;
+    --accent: #2a2722;
+    --accent-foreground: var(--oil);
+    --border: #959285;
+    --border-subtle: rgba(230, 226, 207, 0.18);
+    --input: #959285;
+    --ring: var(--olive);
+    --highlight: var(--olive);
+    --highlight-foreground: var(--ink);
+    --success: #62bb78;
+    --success-foreground: var(--ink);
+    --success-text: #62bb78;
+    --success-muted: #1f3423;
+    --warning: #e1a446;
+    --warning-foreground: var(--ink);
+    --warning-text: #e1a446;
+    --warning-muted: #3e2d15;
+    --destructive: #ed7760;
+    --destructive-foreground: var(--ink);
+    --destructive-text: #ed7760;
+    --destructive-muted: #44241e;
+    --chart-1: #1c8dff; /* pizarra */
+    --chart-2: #be6db7; /* brezo */
+    --chart-3: #8b46df; /* lirio */
+    --chart-4: #009aba; /* turquesa */
+    --chart-5: #92537e; /* ciruela */
+    --chart-6: #4961c8; /* aciano */
+    /* alias de 0.1 */
+    --series-1: var(--chart-1);
+    --series-2: var(--chart-2);
+  }
 }

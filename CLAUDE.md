@@ -7,4 +7,7 @@ Design system de Taller Oliva (paquete `dsto`, repo público `milgron/dsto`). Lo
 - **Catálogo:** `catalogo/`, Next.js local (`./abrir`, puerto 4760). Lee los archivos del repo por ruta relativa.
 - **Versionado:** se sube la versión en `package.json` y se crea el tag `vX.Y.Z`. Los proyectos lo instalan con `github:milgron/dsto#vX.Y.Z`.
 - **Idioma:** el código, en inglés; la UI y los docs, en castellano rioplatense.
-- **Reglas:** el semáforo nunca solo (siempre con etiqueta y forma); nunca como serie de datos; movimiento siempre con `steps()`. Los colores de serie están validados contra daltonismo y contra el semáforo: si se cambian, hay que volver a validarlos.
+- **Dos capas:** materiales (`palette`, `signal`: constantes) y roles (`roles`, `chart`: valor en claro y en oscuro, ambos obligatorios). Los roles claros apuntan a materiales por nombre, así el claro no cambia por accidente. Los componentes y `dsto.css` usan roles, nunca materiales (salvo tramas como `.olive-dots`).
+- **Tema:** claro por defecto. Oscuro solo con `data-theme="dark"`, o `"auto"` para seguir al sistema. Nunca un `@media (prefers-color-scheme)` suelto sobre `:root`: el panel y los sitios que no lo pidieron cambiarían de tema.
+- **Validación:** `scripts/build.mjs` falla (y no escribe) si falta un par, si un contraste declarado en `on` no llega, o si una serie se sale de los chequeos de la skill de dataviz (banda, croma, daltonismo, vecinas, contraste, semáforo). La matemática está en `scripts/color.mjs`. Para un rol nuevo de texto, declarar sus `on`.
+- **Reglas:** el semáforo nunca solo (siempre con etiqueta y forma); nunca como serie de datos; movimiento siempre con `steps()`; cajas planas (`--radius-box: 0`).

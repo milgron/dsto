@@ -1,6 +1,6 @@
 {
   "name": "dsto",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design system de Taller Oliva: tokens, tipografía, clases y movimiento.",
   "type": "module",
   "exports": {
