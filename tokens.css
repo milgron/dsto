@@ -1,0 +1,33 @@
+/* dsto · tokens del design system de Taller Oliva. GENERADO desde src/tokens.ts con `node scripts/build.mjs`: no editar a mano. */
+
+:root {
+  /* paleta */
+  --paper: #f7f4ee; /* papel: fondo papel: blanco cálido */
+  --ink: #1c1a17; /* tinta: tinta casi negra */
+  --olive: #a9ae7b; /* oliva: bloque a sangre: aceite de oliva */
+  --pine: #243d30; /* pino: acento: verde pino */
+  --oil: #e6e2cf; /* aceite: superficie clara sobre oliva */
+  --mute: rgba(28, 26, 23, 0.68); /* apagado: texto secundario */
+  --line: rgba(28, 26, 23, 0.18); /* línea: bordes y divisores suaves */
+
+  /* semáforo: estados de UX, nunca el color solo */
+  --leaf: #3d7a4c; /* hoja: ok · texto y formas */
+  --mustard: #b07a1c; /* mostaza: aviso · solo formas (3,39:1) */
+  --mustard-ink: #86590c; /* mostaza texto: aviso · texto */
+  --paprika: #b3402c; /* pimentón: caído · texto y formas */
+  --leaf-soft: #dfe8d6; /* hoja suave: fondo de fila ok */
+  --mustard-soft: #f1e3c2; /* mostaza suave: fondo de fila aviso */
+  --paprika-soft: #f3dcd4; /* pimentón suave: fondo de fila caído */
+
+  /* series de datos (gráficos): nunca el semáforo como serie */
+  --series-1: #255691; /* pizarra: serie 1 · y la única, si hay una sola */
+  --series-2: #a5679f; /* brezo: serie 2 */
+
+  /* tipografía: las variables --font-fraunces y --font-jetbrains las define next/font en cada app */
+  --dsto-font-display: var(--font-fraunces, "Fraunces"), ui-serif, Georgia, serif;
+  --dsto-font-mono: var(--font-jetbrains, "JetBrains Mono"), ui-monospace, monospace;
+
+  /* tramas (dither): tinta y tamaño de píxel por defecto */
+  --dither: var(--olive);
+  --dpx: 2px;
+}

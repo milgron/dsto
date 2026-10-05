@@ -1,0 +1,18 @@
+{
+  "name": "dsto",
+  "version": "0.1.0",
+  "description": "Design system de Taller Oliva: tokens, tipografía, clases y movimiento.",
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./tokens.css",
+    "./dsto.css": "./dsto.css",
+    "./tailwind.css": "./tailwind.css",
+    "./tokens.json": "./tokens.json",
+    "./package.json": "./package.json"
+  },
+  "files": ["tokens.css", "dsto.css", "tailwind.css", "tokens.json", "README.md"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check"
+  }
+}

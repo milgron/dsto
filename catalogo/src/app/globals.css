@@ -1,0 +1,6 @@
+@import "tailwindcss";
+/* el catálogo usa los archivos del paquete directamente (están un nivel arriba) */
+@import "../../../tailwind.css";
+
+/* las clases de la escala tipográfica viven en tokens.json: que Tailwind las vea */
+@source "../../../tokens.json";

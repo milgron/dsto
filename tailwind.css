@@ -1,0 +1,41 @@
+/* dsto · entrada para proyectos con Tailwind v4. GENERADO desde src/tokens.ts con `node scripts/build.mjs`: no editar a mano. */
+
+@import "./tokens.css";
+@import "./dsto.css";
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-olive: var(--olive);
+  --color-pine: var(--pine);
+  --color-oil: var(--oil);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-leaf: var(--leaf);
+  --color-mustard: var(--mustard);
+  --color-mustard-ink: var(--mustard-ink);
+  --color-paprika: var(--paprika);
+  --color-leaf-soft: var(--leaf-soft);
+  --color-mustard-soft: var(--mustard-soft);
+  --color-paprika-soft: var(--paprika-soft);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --font-display: var(--dsto-font-display);
+  --font-mono: var(--dsto-font-mono);
+}
+
+@utility opsz-* {
+  font-variation-settings: "opsz" --value(integer);
+}
+@utility dither-25 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 0.55), transparent calc(var(--dpx) * 0.55 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}
+@utility dither-50 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 0.8), transparent calc(var(--dpx) * 0.8 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}
+@utility dither-75 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 1.08), transparent calc(var(--dpx) * 1.08 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}

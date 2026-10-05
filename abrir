@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+# Abre el catálogo de dsto en http://127.0.0.1:4760 (solo local).
+cd "$(dirname "$0")/catalogo" || exit 1
+[ -d node_modules ] || pnpm install
+(sleep 4 && xdg-open http://127.0.0.1:4760 >/dev/null 2>&1 &)
+exec pnpm dev

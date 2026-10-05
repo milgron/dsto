@@ -1,0 +1,185 @@
+/*
+ * dsto · clases del design system de Taller Oliva (sin Tailwind: CSS plano).
+ * Necesita tokens.css antes. Extraído de talleroliva/web/src/app/globals.css (2026-10-05).
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-feature-settings: "ss01", "kern";
+  /* nada puede ensanchar la página: lo que sobre se recorta, no scrollea */
+  overflow-x: clip;
+}
+
+
+::selection {
+  background: var(--olive);
+  color: var(--ink);
+}
+
+/* ── Etiquetas mono, estilo ventana ─────────────────────────────── */
+.label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+/* ── Línea de puntos (leader) ───────────────────────────────────── */
+.leader {
+  flex: 1;
+  border-bottom: 2px dotted var(--ink);
+  transform: translateY(-0.35em);
+  min-width: 2rem;
+}
+
+/* ── Underline link ─────────────────────────────────────────────── */
+.ulink {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
+  transition: opacity 200ms ease;
+}
+.ulink:hover { opacity: 0.6; }
+
+/* palabra en otro idioma dentro del texto: itálica verdadera + subrayado fino */
+.foreign {
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.chip {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+.chip:hover:not(:disabled) { background: var(--oil); }
+.chip:disabled { cursor: default; opacity: 0.5; }
+.chip-on, .chip-on:disabled { background: var(--ink); color: var(--paper); opacity: 1; }
+
+/* ── Cursor parpadeante ─────────────────────────────────────────── */
+@keyframes blink { 50% { opacity: 0 } }
+.caret::after { content: "▮"; animation: blink 1s steps(1) infinite; }
+
+/* ══════════════════════════════════════════════════════════════════
+ * Animaciones estilo GIF: a saltos de cuadro, sin easing.
+ * Regla: siempre steps(), nunca ease. Cuadros pocos y visibles.
+ * ══════════════════════════════════════════════════════════════════ */
+
+/* leader punteado: los puntos caminan (hormigas) */
+@keyframes march { to { background-position: 8px 0; } }
+.leader-gif {
+  border-bottom: 0;
+  height: 2px;
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-size: 8px 2px;
+  background-repeat: repeat-x;
+  animation: march 0.6s steps(4) infinite;
+}
+
+/* flecha que salta dos cuadros en hover */
+@keyframes nudge { 50% { transform: translate(3px, -3px); } }
+.group:hover .arrow-gif { animation: nudge 0.5s steps(1) infinite; }
+
+/* + del FAQ: gira a saltos en vez de suave */
+.rot-gif { transition: none; }
+.group[open] .rot-gif { animation: rot45 0.2s steps(2) forwards; }
+@keyframes rot45 { to { transform: rotate(45deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .leader-gif,
+  .arrow-gif,
+  .rot-gif { animation: none !important; }
+  .group[open] .rot-gif { transform: rotate(45deg); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+ * Lo-fi v6: degradés a píxeles, regla, paño de corte.
+ * Los tramados son CSS puro (gradientes cónicos con cortes duros), así
+ * quedan nítidos en cualquier pantalla. --dither es el color de la tinta
+ * y --dpx el tamaño del píxel.
+ * ══════════════════════════════════════════════════════════════════ */
+
+/* botón principal: bloque pino; al pasar, el relleno se vuelve trama */
+.btn-px {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.35em 0.8em 0.4em;
+  background: var(--pine);
+  color: var(--paper);
+  --dither: var(--ink);
+  --dpx: 3px;
+}
+.btn-px::after { content: "→"; font-family: var(--font-jetbrains), monospace; font-size: 0.7em; }
+.btn-px:hover {
+  background-color: var(--pine);
+  background-image: radial-gradient(circle, var(--dither) 1.3px, transparent 1.8px);
+  background-size: 4px 4px;
+}
+
+/* un píxel que titila a dos cuadros */
+@keyframes blinkpx { 50% { opacity: 0.15; } }
+.blink-px { animation: blinkpx 1.2s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blink-px { animation: none; }
+}
+
+.pixelated { image-rendering: pixelated; }
+
+/* ══════════════════════════════════════════════════════════════════
+ * Fondos: la trama queda para las imágenes y los fondos; las cajas son
+ * planas, con borde, sin texturas de papel ni cinta.
+ * ══════════════════════════════════════════════════════════════════ */
+
+/* ── Fondo oliva de puntos ──────────────────────────────────────────
+ * Grano oscuro + grano claro (ruido SVG en dos escalas) y una trama de
+ * puntos tenue. Estático a propósito: es un fondo enorme. */
+.olive-dots {
+  background-color: var(--olive);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.26 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.97 0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(rgba(28, 26, 23, 0.2) 0.6px, transparent 0.9px);
+  background-size: 220px 220px, 300px 300px, 5px 5px;
+}
+
+/* ── Pino con grano (05 · talleres) ─────────────────────────────────
+ * Ruido SVG en dos escalas: negro puro y claro. Ojo: los filtros SVG mezclan
+ * en espacio lineal, así que un "casi negro" sale gris y aclara el pino. La
+ * base es un pino apenas más claro para que el promedio con el grano vuelva
+ * a dar #243d30 (medido: 37, 60, 48) y no haya costura con el degradé. */
+.pine-grain {
+  background-color: #264535;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.97 0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px, 300px 300px;
+}
+
+/* gris de rollo para el video del reel */
+.film-grade { filter: grayscale(1) contrast(1.18) brightness(1.02); }
+
+/* ── Píxel de estado (semáforo): la forma acompaña a la etiqueta, nunca el color solo ── */
+.px { display: inline-block; flex: none; width: 9px; height: 9px; border: 1px solid var(--ink); }
+.px-ok { background: var(--leaf); border-color: var(--leaf); }
+.px-warn { background: var(--mustard); border-color: var(--mustard); }
+.px-down { background: var(--paprika); border-color: var(--paprika); }
+.px-new { background: transparent; }

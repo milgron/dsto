@@ -1,0 +1,15 @@
+@utility opsz-* {
+  font-variation-settings: "opsz" --value(integer);
+}
+@utility dither-25 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 0.55), transparent calc(var(--dpx) * 0.55 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}
+@utility dither-50 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 0.8), transparent calc(var(--dpx) * 0.8 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}
+@utility dither-75 {
+  background-image: radial-gradient(circle, var(--dither) calc(var(--dpx) * 1.08), transparent calc(var(--dpx) * 1.08 + 0.5px));
+  background-size: calc(var(--dpx) * 2) calc(var(--dpx) * 2);
+}
