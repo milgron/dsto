@@ -119,7 +119,10 @@ Eso se revisa al usarlo.
 - **Contraste en claro:**
   - `text-paprika` sobre `bg-paprika-soft` daba 4,34:1: pasa a `text-destructive-text` sobre `bg-destructive-muted` (4,88:1);
   - `text-leaf` sobre `bg-leaf-soft` daba 4,07:1: pasa a `text-success-text` sobre `bg-success-muted` (4,53:1).
-- **Las clases de `dsto.css`** usan roles, así que funcionan en los dos temas. Los chips y el botón principal tienen anillo de foco.
+- **Las clases de `dsto.css`** usan roles, así que funcionan en los dos temas.
+  - Los chips y el botón principal tienen anillo de foco.
+  - Un `.chip-on` queda invertido al pasar el mouse; en 0.1 se volvía aceite.
+- **En la escala tipográfica,** "cuerpo chico" usa `text-muted-foreground` en lugar de `text-mute`. En claro es el mismo color.
 
 **Reglas que viajan con los tokens:**
 - **Semáforo:** nunca el color solo; siempre con etiqueta y forma.
